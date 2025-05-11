@@ -133,10 +133,8 @@ class StudentDepressionPredictor:
         return df
 
     def ensure_images_dir(self):
-
-        if not os.path.exists('images'):
-            os.makedirs('images', exist_ok=True)
-            print("Created 'images' directory for saving visualizations")
+        os.makedirs('images', exist_ok=True)
+        print("Created 'images' directory for saving visualizations")
         return os.path.join(os.getcwd(), 'images')
 
     def visualize_data(self, df):
