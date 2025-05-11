@@ -34,9 +34,9 @@ class StudentDepressionPredictor:
         self.X_train, self.X_test, self.y_train, self.y_test, self.preprocessor = self.prepare_data(
             self.df)
 
-        # Train the model
-        self.model = self.train_and_evaluate_model(
-            self.X_train, self.y_train, self.X_test, self.y_test, self.preprocessor)
+        # # Train the model
+        # self.model = self.train_and_evaluate_model(
+        #     self.X_train, self.y_train, self.X_test, self.y_test, self.preprocessor)
 
         # Analyze feature importance
         self.feature_importance = self.analyze_feature_importance(self.model)
