@@ -35,9 +35,15 @@ class StudentDepressionPredictor:
             self.df)
 
         # Train the model
-        self.model = self.train_and_evaluate_model(
-            self.X_train, self.y_train, self.X_test, self.y_test, self.preprocessor)
+        #self.model = self.train_and_evaluate_model(
+            #self.X_train, self.y_train, self.X_test, self.y_test, self.preprocessor)
+        # Load saved model
+        import joblib
+        self.model = joblib.load(os.path.join(project_root, 'model.pkl'))
+        import joblib
 
+        self.preprocessor = joblib.load(os.path.join(project_root, 'preprocessor.pkl'))
+        
         # Analyze feature importance
         self.feature_importance = self.analyze_feature_importance(self.model)
 
