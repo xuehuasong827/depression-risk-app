@@ -133,6 +133,8 @@ class StudentDepressionPredictor:
         return df
 
     def ensure_images_dir(self):
+        import shutil
+        shutil.rmtree('images', ignore_errors=True)
         os.makedirs('images', exist_ok=True)
         print("Created 'images' directory for saving visualizations")
         return os.path.join(os.getcwd(), 'images')
