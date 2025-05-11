@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import joblib
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
@@ -21,6 +22,10 @@ class StudentDepressionPredictor:
 
         print("=== STUDENT DEPRESSION PREDICTION PROJECT ===\n")
 
+        #recording the root
+        self.project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+
         # Load and explore data
         self.df = self.load_and_explore_data(filepath)
 
@@ -30,6 +35,13 @@ class StudentDepressionPredictor:
         # Visualize data
         self.visualize_data(self.df)
 
+        #load model and preprocessor
+        model_path = os.path.join(self.project_root, "model.pkl")
+        preprocessor_path = os.path.join(self.project_root, "preprocessor.pkl")
+        self.model = joblib.load(model_path)
+        self.preprocessor = joblib.load(preprocessor_path)
+        print("Loaded pre-trained model and preprocessor.")
+
         # Prepare data for modeling
         self.X_train, self.X_test, self.y_train, self.y_test, self.preprocessor = self.prepare_data(
             self.df)
@@ -37,13 +49,8 @@ class StudentDepressionPredictor:
         # Train the model
         #self.model = self.train_and_evaluate_model(
             #self.X_train, self.y_train, self.X_test, self.y_test, self.preprocessor)
-        # Load saved model
-        import joblib
-        self.model = joblib.load(os.path.join(project_root, 'model.pkl'))
-        import joblib
 
-        self.preprocessor = joblib.load(os.path.join(project_root, 'preprocessor.pkl'))
-        
+
         # Analyze feature importance
         self.feature_importance = self.analyze_feature_importance(self.model)
 
